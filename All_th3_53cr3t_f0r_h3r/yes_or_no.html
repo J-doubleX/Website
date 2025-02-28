@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My ECRH ❤️</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #ffebf3;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      overflow: hidden; /* Prevent scrolling when the button grows */
+      position: relative; /* Allow absolute positioning of the "No" button */
+    }
+    h1 {
+      color: #ff6b6b;
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    #yesButton {
+      background-color: #4caf50;
+      color: white;
+    }
+    #noButton {
+      background-color: #ff6b6b;
+      color: white;
+      position: absolute; /* Allow the "No" button to move freely */
+      left: 50%; /* Start in the center horizontally */
+      top: 60%; /* Start below the "Yes" button */
+      transform: translate(-50%, -50%); /* Center the button */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Will you be mine forever? ❤️</h1>
+    <div class="buttons">
+      <button id="yesButton">Yes</button>
+      <button id="noButton">No</button>
+    </div>
+  </div>
+
+  <script>
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+    let scale = 1; // Initial scale of the "Yes" button
+
+    noButton.addEventListener('click', () => {
+      // Increase the size of the "Yes" button
+      scale += 0.5;
+      yesButton.style.transform = `scale(${scale})`;
+
+      // If the scale is >= 10, make the "Yes" button cover the whole screen
+      if (scale >= 8) {
+        yesButton.style.width = "100vw";
+        yesButton.style.height = "100vh";
+        yesButton.style.borderRadius = "0";
+        yesButton.style.fontSize = "5rem";
+        yesButton.style.position = "fixed";
+        yesButton.style.top = "0";
+        yesButton.style.left = "0";
+        yesButton.style.transform = "none";
+        yesButton.textContent = "YESSS";
+        noButton.style.display = "none"; // Hide the "No" button
+      }
+
+      // Move the "No" button to a random position along the sides
+      moveNoButton();
+    });
+
+    yesButton.addEventListener('click', () => {
+      alert("Yay! You made me the happiest person in the world! ❤️");
+    });
+
+    function moveNoButton() {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+
+      // Randomly choose a side (0: top, 1: right, 2: bottom, 3: left)
+      const side = Math.floor(Math.random() * 4);
+
+      let newX, newY;
+
+      switch (side) {
+        case 0: // Top
+          newX = Math.random() * screenWidth;
+          newY = 0;
+          break;
+        case 1: // Right
+          newX = screenWidth - noButton.offsetWidth;
+          newY = Math.random() * screenHeight;
+          break;
+        case 2: // Bottom
+          newX = Math.random() * screenWidth;
+          newY = screenHeight - noButton.offsetHeight;
+          break;
+        case 3: // Left
+          newX = 0;
+          newY = Math.random() * screenHeight;
+          break;
+      }
+
+      // Ensure the button stays within the screen
+      newX = Math.max(0, Math.min(newX, screenWidth - noButton.offsetWidth));
+      newY = Math.max(0, Math.min(newY, screenHeight - noButton.offsetHeight));
+
+      // Apply the new position
+      noButton.style.left = `${newX}px`;
+      noButton.style.top = `${newY}px`;
+    }
+  </script>
+</body>
+</html>
