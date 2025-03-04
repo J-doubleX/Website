@@ -1,0 +1,19 @@
+body{
+  background-color: #2E4F5A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  widtH: 100vw;
+  height: 100vh;
+}
+
+.main {
+  display: flex;
+  background-color: #D8E2E8;
+  color: #4A5A66;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
